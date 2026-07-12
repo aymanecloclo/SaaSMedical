@@ -1,0 +1,15 @@
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\bin\Debug\net9.0\TabibPlus.Application.deps.json
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\bin\Debug\net9.0\TabibPlus.Application.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\bin\Debug\net9.0\TabibPlus.Application.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\bin\Debug\net9.0\TabibPlus.Core.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\bin\Debug\net9.0\TabibPlus.Core.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\TabibPlus.Application.csproj.AssemblyReference.cache
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\TabibPlus.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\TabibPlus.Application.AssemblyInfoInputs.cache
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\TabibPlus.Application.AssemblyInfo.cs
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\TabibPlus.Application.csproj.CoreCompileInputs.cache
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\TabibPlu.6AE19A61.Up2Date
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\TabibPlus.Application.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\refint\TabibPlus.Application.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\TabibPlus.Application.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Application\obj\Debug\net9.0\ref\TabibPlus.Application.dll

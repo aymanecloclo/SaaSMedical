@@ -1,0 +1,11 @@
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\bin\Debug\net9.0\TabibPlus.Core.deps.json
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\bin\Debug\net9.0\TabibPlus.Core.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\bin\Debug\net9.0\TabibPlus.Core.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.AssemblyInfoInputs.cache
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.AssemblyInfo.cs
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.csproj.CoreCompileInputs.cache
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\refint\TabibPlus.Core.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\ref\TabibPlus.Core.dll

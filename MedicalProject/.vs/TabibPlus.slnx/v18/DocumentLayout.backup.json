@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|c:\\users\\hj\\desktop\\saas-medical\\medicalproject\\tabibplus.api\\controllers\\rendezvouscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|solutionrelative:tabibplus.api\\controllers\\rendezvouscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|c:\\users\\hj\\desktop\\saas-medical\\medicalproject\\tabibplus.api\\controllers\\patientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|solutionrelative:tabibplus.api\\controllers\\patientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|c:\\users\\hj\\desktop\\saas-medical\\medicalproject\\tabibplus.api\\controllers\\praticienspubliccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|solutionrelative:tabibplus.api\\controllers\\praticienspubliccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|c:\\users\\hj\\desktop\\saas-medical\\medicalproject\\tabibplus.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|solutionrelative:tabibplus.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|c:\\users\\hj\\desktop\\saas-medical\\medicalproject\\tabibplus.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|solutionrelative:tabibplus.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|c:\\users\\hj\\desktop\\saas-medical\\medicalproject\\tabibplus.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0CB5F845-249B-E51A-483B-5B82E3567C56}|TabibPlus.API\\TabibPlus.API.csproj|solutionrelative:tabibplus.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RendezVousController.cs",
+              "DocumentMoniker": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Controllers\\RendezVousController.cs",
+              "RelativeDocumentMoniker": "TabibPlus.API\\Controllers\\RendezVousController.cs",
+              "ToolTip": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Controllers\\RendezVousController.cs",
+              "RelativeToolTip": "TabibPlus.API\\Controllers\\RendezVousController.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAAJIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-31T13:16:15.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PatientsController.cs",
+              "DocumentMoniker": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Controllers\\PatientsController.cs",
+              "RelativeDocumentMoniker": "TabibPlus.API\\Controllers\\PatientsController.cs",
+              "ToolTip": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Controllers\\PatientsController.cs",
+              "RelativeToolTip": "TabibPlus.API\\Controllers\\PatientsController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAEoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-31T13:15:54.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PraticiensPublicController.cs",
+              "DocumentMoniker": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Controllers\\PraticiensPublicController.cs",
+              "RelativeDocumentMoniker": "TabibPlus.API\\Controllers\\PraticiensPublicController.cs",
+              "ToolTip": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Controllers\\PraticiensPublicController.cs",
+              "RelativeToolTip": "TabibPlus.API\\Controllers\\PraticiensPublicController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAqwEIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-31T13:14:21.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Program.cs",
+              "RelativeDocumentMoniker": "TabibPlus.API\\Program.cs",
+              "ToolTip": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Program.cs",
+              "RelativeToolTip": "TabibPlus.API\\Program.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAGYAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-31T13:07:32.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "TabibPlus.API\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\Properties\\launchSettings.json",
+              "RelativeToolTip": "TabibPlus.API\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-31T12:56:44.382Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\appsettings.json",
+              "RelativeDocumentMoniker": "TabibPlus.API\\appsettings.json",
+              "ToolTip": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.API\\appsettings.json",
+              "RelativeToolTip": "TabibPlus.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-05-31T12:56:38.597Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
