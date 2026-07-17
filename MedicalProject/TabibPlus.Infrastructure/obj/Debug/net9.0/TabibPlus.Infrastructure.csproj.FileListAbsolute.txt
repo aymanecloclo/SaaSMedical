@@ -4,3 +4,17 @@ C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Deb
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\TabibPlus.Infrastructure.AssemblyInfo.cs
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\TabibPlus.Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\TabibPlus.Infrastructure.sourcelink.json
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\bin\Debug\net9.0\TabibPlus.Infrastructure.deps.json
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\bin\Debug\net9.0\TabibPlus.Infrastructure.runtimeconfig.json
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\bin\Debug\net9.0\TabibPlus.Infrastructure.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\bin\Debug\net9.0\TabibPlus.Infrastructure.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\bin\Debug\net9.0\TabibPlus.Application.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\bin\Debug\net9.0\TabibPlus.Core.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\bin\Debug\net9.0\TabibPlus.Core.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\bin\Debug\net9.0\TabibPlus.Application.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\TabibPlu.6BE2AD0B.Up2Date
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\TabibPlus.Infrastructure.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\refint\TabibPlus.Infrastructure.dll
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\TabibPlus.Infrastructure.pdb
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\TabibPlus.Infrastructure.genruntimeconfig.cache
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Infrastructure\obj\Debug\net9.0\ref\TabibPlus.Infrastructure.dll

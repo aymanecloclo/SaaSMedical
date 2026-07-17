@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TabibPlus.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59406cb8b618c78aff4e2ff7760a98856d545957")]
 [assembly: System.Reflection.AssemblyProductAttribute("TabibPlus.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TabibPlus.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -3,7 +3,7 @@ export interface Praticien {
   nom: string;
   prenom: string;
   nomComplet: string;
-  specialite: string;          // ⚠️ backend renvoie le cabinet ici (bug à corriger)
+  specialite: string; // ⚠️ backend renvoie le cabinet ici (bug à corriger)
   photoProfil: string | null;
   ville: string;
   honoraires: number;
@@ -16,12 +16,7 @@ export interface Praticien {
   anneesExperience: number;
 }
 
-export interface SearchFilters {
-  specialite?: string;
-  ville?: string;
-  secteur?: string;
-  teleconsult?: boolean;
-}
+
 
 export type SortOption = "note" | "prix_asc" | "prix_desc";
 // Détail complet d'un praticien — correspond au PraticienDetailDto backend
@@ -46,4 +41,20 @@ export interface PraticienDetail {
   longitude: number | null;
   siteWeb: string | null;
   telephone: string | null;
+}
+
+export interface SearchFilters {
+  specialite?: string;
+  ville?: string;
+  secteur?: string;
+  teleconsult?: boolean;
+  page?: number; 
+}
+
+export interface PraticienPage {
+  items: Praticien[];
+  totalCount: number;
+  page: number;
+  taille: number;
+  totalPages: number;
 }

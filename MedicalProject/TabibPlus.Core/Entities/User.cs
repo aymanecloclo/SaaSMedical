@@ -39,8 +39,8 @@ namespace TabibPlus.Core.Entities
         public string Type { get; set; } = "Solo";
         // Solo | Groupe | Clinique
         public string Adresse { get; set; } = string.Empty;
-        public string Ville { get; set; } = string.Empty;
         public int? VilleId { get; set; }
+        public Ville? Ville { get; set; }
         public string Telephone { get; set; } = string.Empty;
         public string? Email { get; set; }
         public string? SiteWeb { get; set; }

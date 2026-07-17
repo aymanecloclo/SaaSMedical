@@ -40,7 +40,14 @@ namespace TabibPlus.Infrastructure.Data
                     .HasDefaultValue("Patient")
                     .HasMaxLength(20);
             });
-
+            // ── Cabinet ──────────────────────────────────────────
+            builder.Entity<Cabinet>(e =>
+            {
+                e.HasOne(c => c.Ville)
+                    .WithMany(v => v.Cabinets)
+                    .HasForeignKey(c => c.VilleId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
             // ── Patient ─────────────────────────────
             builder.Entity<Patient>(e =>
             {
@@ -170,7 +177,7 @@ namespace TabibPlus.Infrastructure.Data
                 Nom = "Cabinet Test TabibPlus",
                 Type = "Solo",
                 Adresse = "123 Avenue Mohammed V",
-                Ville = "Casablanca",
+                VilleId = 1,
                 Telephone = "0522000000",
                 Abonnement = "Premium",
                 CreeLe = new DateTime(2025, 1, 1)

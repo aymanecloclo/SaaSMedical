@@ -8,6 +8,6 @@ namespace TabibPlus.Application.Praticiens.SearchPraticiens
         bool? DisponibleAujourdhui,
         string? Langue,
         int Page = 1,
-        int Taille = 20
+        int Taille = 1000
     );
 }

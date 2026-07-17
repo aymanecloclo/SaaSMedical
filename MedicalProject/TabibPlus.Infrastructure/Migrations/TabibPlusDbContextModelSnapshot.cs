@@ -164,10 +164,6 @@ namespace TabibPlus.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ville")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("VilleId")
                         .HasColumnType("int");
 
@@ -189,7 +185,7 @@ namespace TabibPlus.Infrastructure.Migrations
                             Parking = false,
                             Telephone = "0522000000",
                             Type = "Solo",
-                            Ville = "Casablanca"
+                            VilleId = 1
                         });
                 });
 
@@ -907,9 +903,12 @@ namespace TabibPlus.Infrastructure.Migrations
 
             modelBuilder.Entity("TabibPlus.Core.Entities.Cabinet", b =>
                 {
-                    b.HasOne("TabibPlus.Core.Entities.Ville", null)
+                    b.HasOne("TabibPlus.Core.Entities.Ville", "Ville")
                         .WithMany("Cabinets")
-                        .HasForeignKey("VilleId");
+                        .HasForeignKey("VilleId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Ville");
                 });
 
             modelBuilder.Entity("TabibPlus.Core.Entities.PhotoCabinet", b =>
