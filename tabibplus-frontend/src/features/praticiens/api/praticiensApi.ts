@@ -26,3 +26,5 @@ export async function getPraticienById(id: number): Promise<PraticienDetail> {
   const { data } = await api.get<PraticienDetail>(`/public/praticiens/${id}`);
   return data;
 }
+
+////
