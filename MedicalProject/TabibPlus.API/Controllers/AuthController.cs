@@ -31,7 +31,6 @@ namespace TabibPlus.API.Controllers
             _registerProfessionnelHandler = registerProfessionnelHandler;
         }
 
-        // ── POST /api/auth/login ──────────────────────────────────────────
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
@@ -46,10 +45,14 @@ namespace TabibPlus.API.Controllers
             if (!valide)
                 return Unauthorized(new { message = "Email ou mot de passe incorrect" });
 
+            // NOUVEAU : on cherche le Patient lié à ce User (peut être null si c'est un praticien)
+            var patient = await _db.Patients
+                .FirstOrDefaultAsync(p => p.UserId == user.Id && p.Actif);
+
             user.DerniereConnexion = DateTime.UtcNow;
             await _db.SaveChangesAsync();
 
-            var token = GenererToken(user);
+            var token = GenererToken(user, patient?.Id);
 
             return Ok(new
             {
@@ -60,9 +63,12 @@ namespace TabibPlus.API.Controllers
                     user.Email,
                     user.Role,
                     praticienId = user.Praticien?.Id,
+                    patientId = patient?.Id,
                     nom = user.Praticien != null
                         ? $"Dr. {user.Praticien.Prenom} {user.Praticien.Nom}"
-                        : user.Email
+                        : patient != null
+                            ? $"{patient.Prenom} {patient.Nom}"
+                            : user.Email
                 }
             });
         }
@@ -126,7 +132,7 @@ namespace TabibPlus.API.Controllers
             }
         }
         // ── Génération JWT ────────────────────────────────────────────────
-        private string GenererToken(User user)
+        private string GenererToken(User user, int? patientId)
         {
             var key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
@@ -134,11 +140,12 @@ namespace TabibPlus.API.Controllers
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role),
-                new Claim("praticienId", user.Praticien?.Id.ToString() ?? "")
-            };
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Email, user.Email),
+        new Claim(ClaimTypes.Role, user.Role),
+        new Claim("praticienId", user.Praticien?.Id.ToString() ?? ""),
+        new Claim("patientId", patientId?.ToString() ?? "")
+    };
 
             var expiration = int.Parse(_config["Jwt:ExpirationHours"] ?? "8");
             var token = new JwtSecurityToken(

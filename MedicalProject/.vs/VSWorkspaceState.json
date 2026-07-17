@@ -2,9 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\TabibPlus.API",
-    "\\TabibPlus.Infrastructure",
+    "\\TabibPlus.API\\Controllers",
+    "\\TabibPlus.API\\Properties",
+    "\\TabibPlus.API\\wwwroot",
+    "\\TabibPlus.API\\wwwroot\\uploads\\praticiens",
+    "\\TabibPlus.Application\\Auth",
+    "\\TabibPlus.Application\\Auth\\RegisterProfessionnel",
     "\\TabibPlus.Infrastructure\\Repositories"
   ],
-  "SelectedNode": "\\TabibPlus.API\\appsettings.json",
+  "SelectedNode": "\\TabibPlus.API\\Controllers\\UploadController.cs",
   "PreviewInSolutionExplorer": false
 }

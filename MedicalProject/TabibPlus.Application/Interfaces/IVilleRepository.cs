@@ -7,5 +7,6 @@ namespace TabibPlus.Application.Interfaces
     public interface IVilleRepository
     {
         Task<IEnumerable<Ville>> GetAllAsync();
+        Task<Ville?> GetByIdAsync(int id);
     }
 }

@@ -8,11 +8,11 @@ export interface LoginRequest {
 export interface User {
   id: number;
   email: string;
-  role: string;              // ex: "Secretaire", "Admin", "Patient"...
+  role: string;
   praticienId: number | null;
+  patientId: number | null; // NOUVEAU
   nom: string;
 }
-
 // Ce qu'on REÇOIT du login
 export interface LoginResponse {
   token: string;
@@ -61,6 +61,7 @@ export interface RegisterProfessionnelRequest {
   cabinetNom: string;
   adresse: string;
   villeId: number;
+  photoProfil?: string;
 }
 
 export interface RegisterProfessionnelFormValues extends RegisterProfessionnelRequest {

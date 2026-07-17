@@ -942,7 +942,7 @@ namespace TabibPlus.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TabibPlus.Core.Entities.Specialite", null)
+                    b.HasOne("TabibPlus.Core.Entities.Specialite", "Specialite")
                         .WithMany("Praticiens")
                         .HasForeignKey("SpecialiteId");
 
@@ -957,6 +957,8 @@ namespace TabibPlus.Infrastructure.Migrations
                         .HasForeignKey("VilleId");
 
                     b.Navigation("Cabinet");
+
+                    b.Navigation("Specialite");
 
                     b.Navigation("User");
                 });

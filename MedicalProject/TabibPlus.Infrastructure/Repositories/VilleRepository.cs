@@ -19,5 +19,7 @@ namespace TabibPlus.Infrastructure.Repositories
             => await _db.Villes
                 .OrderBy(v => v.NomFr)
                 .ToListAsync();
+        public async Task<Ville?> GetByIdAsync(int id)
+    => await _db.Villes.FindAsync(id);
     }
 }

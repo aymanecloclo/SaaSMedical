@@ -5,6 +5,7 @@ C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.AssemblyInfoInputs.cache
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.AssemblyInfo.cs
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.csproj.CoreCompileInputs.cache
+C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.sourcelink.json
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.dll
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\refint\TabibPlus.Core.dll
 C:\Users\hj\Desktop\SaaS-Medical\MedicalProject\TabibPlus.Core\obj\Debug\net9.0\TabibPlus.Core.pdb

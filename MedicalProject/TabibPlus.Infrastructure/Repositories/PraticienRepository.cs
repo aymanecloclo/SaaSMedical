@@ -19,7 +19,7 @@ namespace TabibPlus.Infrastructure.Repositories
 		public async Task<Praticien?> GetByIdAsync(int id)
 			=> await _db.Praticiens
 				.Include(p => p.User)
-				.Include(p => p.Cabinet)
+                .Include(p => p.Cabinet!.Ville)
                 .Include(p => p.Specialite)
                 .Include(p => p.Photos)
 				.Include(p => p.PlagesHoraires)
@@ -34,7 +34,7 @@ namespace TabibPlus.Infrastructure.Repositories
 			bool? disponibleAujourdhui)
 		{
 			var q = _db.Praticiens
-				.Include(p => p.Cabinet)
+                .Include(p => p.Cabinet!.Ville)
                 .Include(p => p.Specialite)
                 .Include(p => p.Photos)
 				.Where(p => p.ProfilValide
@@ -47,11 +47,11 @@ namespace TabibPlus.Infrastructure.Repositories
                         .Contains(specialite.ToLower()));
 
             if (!string.IsNullOrWhiteSpace(ville))
-				q = q.Where(p =>
-					p.Cabinet.Ville.ToLower()
-						.Contains(ville.ToLower()));
-
-			if (!string.IsNullOrWhiteSpace(secteur))
+                q = q.Where(p =>
+                    p.Cabinet.Ville != null &&
+                    p.Cabinet.Ville.NomFr.ToLower()
+                        .Contains(ville.ToLower()));
+            if (!string.IsNullOrWhiteSpace(secteur))
 				q = q.Where(p => p.Secteur == secteur);
 
 			if (teleconsult == true)

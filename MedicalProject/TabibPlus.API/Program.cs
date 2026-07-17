@@ -96,6 +96,8 @@ builder.Services.AddAuthorization(options =>
         p => p.RequireRole("Admin", "Praticien", "Secretaire"));
 });
 
+
+
 // ── 6. CORS ───────────────────────────────────────
 builder.Services.AddCors(options =>
 {
@@ -124,6 +126,7 @@ if (app.Environment.IsDevelopment())
 // ── 9. Pipeline HTTP ──────────────────────────────
 app.MapOpenApi();
 app.MapScalarApiReference();
+app.UseStaticFiles();   // ← NOUVEAU : sert wwwroot/uploads/xxx.jpg
 app.UseCors("FrontendPolicy");
 app.UseAuthentication();
 app.UseAuthorization();

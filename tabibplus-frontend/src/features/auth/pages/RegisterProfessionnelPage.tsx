@@ -6,12 +6,17 @@ import type { RegisterProfessionnelFormValues } from "../types";
 import { Card } from "../../../components/ui/Card";
 import { Input } from "../../../components/ui/Input";
 import { Button } from "../../../components/ui/Button";
-
+import { ImageUpload } from "../../../components/ui/ImageUpload";
 const SECTEURS = ["CNOPS", "CNSS", "Libre", "CNOPS_CNSS"];
 
 export function RegisterProfessionnelPage() {
-  const { register, handleSubmit, watch, formState: { errors } } =
-    useForm<RegisterProfessionnelFormValues>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<RegisterProfessionnelFormValues>();
   const mutation = useRegisterProfessionnel();
   const { data: specialites, isLoading: loadingSpec } = useSpecialites();
   const { data: villes, isLoading: loadingVilles } = useVilles();
@@ -38,11 +43,23 @@ export function RegisterProfessionnelPage() {
 
       <Card className="relative w-full max-w-2xl animate-fadeIn">
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-gray-900">Inscription praticien</h1>
-          <p className="mt-1 text-sm text-gray-500">Créez votre espace professionnel</p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Inscription praticien
+          </h1>
+          <p className="mt-1 text-sm text-gray-500">
+            Créez votre espace professionnel
+          </p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <input type="hidden" {...register("photoProfil")} />
+          {/* ── Photo de profil ── */}
+          <div className="flex justify-center pb-2">
+            <ImageUpload
+              onUploadSuccess={(url) => setValue("photoProfil", url)}
+              photoActuelle={watch("photoProfil")}
+            />
+          </div>
           {/* Identité */}
           <div className="grid gap-4 sm:grid-cols-2">
             <Input
@@ -84,32 +101,52 @@ export function RegisterProfessionnelPage() {
           {/* Spécialité + Secteur */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-gray-700">Spécialité</label>
+              <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                Spécialité
+              </label>
               <select
                 className={selectClass}
                 disabled={loadingSpec}
-                {...register("specialiteId", { required: "Spécialité requise" })}
+                {...register("specialiteId", {
+                  required: "Spécialité requise",
+                })}
               >
-                <option value="">{loadingSpec ? "Chargement..." : "Choisir..."}</option>
+                <option value="">
+                  {loadingSpec ? "Chargement..." : "Choisir..."}
+                </option>
                 {specialites?.map((s) => (
-                  <option key={s.id} value={s.id}>{s.nom}</option>
+                  <option key={s.id} value={s.id}>
+                    {s.nom}
+                  </option>
                 ))}
               </select>
-              {errors.specialiteId && <p className="mt-1.5 text-sm text-red-500">{errors.specialiteId.message}</p>}
+              {errors.specialiteId && (
+                <p className="mt-1.5 text-sm text-red-500">
+                  {errors.specialiteId.message}
+                </p>
+              )}
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-gray-700">Secteur</label>
+              <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                Secteur
+              </label>
               <select
                 className={selectClass}
                 {...register("secteur", { required: "Secteur requis" })}
               >
                 <option value="">Choisir...</option>
                 {SECTEURS.map((s) => (
-                  <option key={s} value={s}>{s}</option>
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
                 ))}
               </select>
-              {errors.secteur && <p className="mt-1.5 text-sm text-red-500">{errors.secteur.message}</p>}
+              {errors.secteur && (
+                <p className="mt-1.5 text-sm text-red-500">
+                  {errors.secteur.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -131,18 +168,28 @@ export function RegisterProfessionnelPage() {
               {...register("adresse", { required: "Adresse requise" })}
             />
             <div>
-              <label className="mb-1.5 block text-sm font-medium text-gray-700">Ville</label>
+              <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                Ville
+              </label>
               <select
                 className={selectClass}
                 disabled={loadingVilles}
                 {...register("villeId", { required: "Ville requise" })}
               >
-                <option value="">{loadingVilles ? "Chargement..." : "Choisir..."}</option>
+                <option value="">
+                  {loadingVilles ? "Chargement..." : "Choisir..."}
+                </option>
                 {villes?.map((v) => (
-                  <option key={v.id} value={v.id}>{v.nom}</option>
+                  <option key={v.id} value={v.id}>
+                    {v.nom}
+                  </option>
                 ))}
               </select>
-              {errors.villeId && <p className="mt-1.5 text-sm text-red-500">{errors.villeId.message}</p>}
+              {errors.villeId && (
+                <p className="mt-1.5 text-sm text-red-500">
+                  {errors.villeId.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -167,7 +214,8 @@ export function RegisterProfessionnelPage() {
               error={errors.confirmMotDePasse?.message}
               {...register("confirmMotDePasse", {
                 required: "Confirmation requise",
-                validate: (v) => v === motDePasse || "Les mots de passe ne correspondent pas",
+                validate: (v) =>
+                  v === motDePasse || "Les mots de passe ne correspondent pas",
               })}
             />
           </div>
