@@ -1,0 +1,6 @@
+# Build outputs .NET — régénérés automatiquement, jamais à committer
+bin/
+obj/
+
+# Fichiers Visual Studio (si présents)
+.vs/
