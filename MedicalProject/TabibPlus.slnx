@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TabibPlus.API/TabibPlus.API.csproj" />
+  <Project Path="TabibPlus.Application/TabibPlus.Application.csproj" />
+  <Project Path="TabibPlus.Core/TabibPlus.Core.csproj" />
+  <Project Path="TabibPlus.Infrastructure/TabibPlus.Infrastructure.csproj" />
+</Solution>

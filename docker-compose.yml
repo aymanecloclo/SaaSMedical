@@ -1,0 +1,53 @@
+services:
+  # ── Base de données SQL Server ──────────────────────────
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: tabibplus-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "TabibPlus_2025!"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    networks:
+      - tabibplus-net
+
+  # ── Backend .NET 9 ──────────────────────────────────────
+  backend:
+    build:
+      context: ./MedicalProject
+      dockerfile: Dockerfile
+    container_name: tabibplus-backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=TabibPlusDb;User Id=sa;Password=TabibPlus_2025!;TrustServerCertificate=True;"
+    ports:
+      - "5047:8080"
+    depends_on:
+      - sqlserver
+    networks:
+      - tabibplus-net
+
+  # ── Frontend React + nginx ──────────────────────────────
+  frontend:
+    build:
+      context:  ./tabibplus-frontend
+      dockerfile: Dockerfile
+    container_name: tabibplus-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - tabibplus-net
+
+# ── Volume persistant pour la base ──────────────────────────
+volumes:
+  sql_data:
+
+# ── Réseau interne partagé ──────────────────────────────────
+networks:
+  tabibplus-net:
+    driver: bridge
