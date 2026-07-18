@@ -1,14 +1,16 @@
 import { useState, useRef } from "react";
 import { Camera } from "lucide-react";
 import api from "../../lib/api";
-
+import { getImageUrl } from "../../lib/getImageUrl";
 interface ImageUploadProps {
   onUploadSuccess: (url: string) => void;
   photoActuelle?: string;
 }
 
 export function ImageUpload({ onUploadSuccess, photoActuelle }: ImageUploadProps) {
-  const [preview, setPreview] = useState<string | null>(photoActuelle || null);
+  const [preview, setPreview] = useState<string | null>(
+    getImageUrl(photoActuelle) || null,
+  );
   const [chargement, setChargement] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,7 +39,7 @@ export function ImageUpload({ onUploadSuccess, photoActuelle }: ImageUploadProps
       onUploadSuccess(response.data.url);
     } catch (err: any) {
       setErreur(err.response?.data?.message || "Erreur upload");
-      setPreview(photoActuelle || null);
+     setPreview(getImageUrl(photoActuelle) || null);
     } finally {
       setChargement(false);
     }

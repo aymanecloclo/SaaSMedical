@@ -10,12 +10,13 @@ import {
   CalendarDays,
   ChevronRight,
 } from "lucide-react";
-import type { Praticien } from "../types";
+import type { Praticien } from "../type";
 
 export function PraticienCard({ praticien }: { praticien: Praticien }) {
   const navigate = useNavigate();
-const avatar =
-  getImageUrl(praticien.photoProfil) || "/images/default-doctor.jpg";
+
+  const avatar =
+    getImageUrl(praticien.photoProfil) || "/images/default-doctor.jpg";
 
   return (
     <div

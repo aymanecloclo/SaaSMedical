@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TabibPlus.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59406cb8b618c78aff4e2ff7760a98856d545957")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c63aaf709e5797517d93edd82167902955a0e76")]
 [assembly: System.Reflection.AssemblyProductAttribute("TabibPlus.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TabibPlus.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

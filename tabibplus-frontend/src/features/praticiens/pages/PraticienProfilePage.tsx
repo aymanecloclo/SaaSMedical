@@ -61,8 +61,8 @@ export function PraticienProfilePage() {
           {/* Avatar */}
           {praticien.photoProfil ? (
             <img
-              src={getImageUrl(praticien.photoProfil)}
-              alt={praticien.nomComplet}
+              src={getImageUrl(praticien.photoProfil)} alt={praticien.nomComplet}
+            
               className="h-24 w-24 flex-shrink-0 rounded-2xl object-cover"
             />
           ) : (
