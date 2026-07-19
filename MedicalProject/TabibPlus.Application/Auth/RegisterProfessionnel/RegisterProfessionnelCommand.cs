@@ -11,6 +11,7 @@ namespace TabibPlus.Application.Auth.RegisterProfessionnel
         string Telephone,
         int SpecialiteId,
         string Secteur,          // CNOPS | CNSS | Libre | CNOPS_CNSS
+        string? PhotoProfil,     // NOUVEAU — URL renvoyée par /api/upload/image
 
         // ── Cabinet ──
         string CabinetNom,

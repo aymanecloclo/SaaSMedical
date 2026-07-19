@@ -10,7 +10,8 @@ export interface User {
   email: string;
   role: string;
   praticienId: number | null;
-  patientId: number | null; // NOUVEAU
+  patientId: number | null;
+  photoUrl?: string | null;   // NOUVEAU
   nom: string;
 }
 // Ce qu'on REÇOIT du login

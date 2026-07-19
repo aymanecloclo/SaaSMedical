@@ -15,6 +15,7 @@ export async function searchPraticiens(
       ville: filters.ville,
       secteur: filters.secteur,
       teleconsult: filters.teleconsult,
+      motCle: filters.motCle, // NOUVEAU
       page: filters.page ?? 1,
       taille: 20,
     },

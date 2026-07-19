@@ -17,12 +17,13 @@ namespace TabibPlus.Application.Praticiens.SearchPraticiens
             SearchPraticiensQuery query)
         {
             var praticiens = await _repo.SearchAsync(
-                query.Specialite,
-                query.Ville,
-                query.Secteur,
-                query.Teleconsult,
-                query.DisponibleAujourdhui
-            );
+      query.Specialite,
+      query.Ville,
+      query.Secteur,
+      query.Teleconsult,
+      query.DisponibleAujourdhui,
+      query.MotCle
+  );
 
             var listeComplete = praticiens.ToList();
             int totalCount = listeComplete.Count;

@@ -7,7 +7,8 @@ namespace TabibPlus.Application.Praticiens.SearchPraticiens
         bool? Teleconsult,
         bool? DisponibleAujourdhui,
         string? Langue,
+        string? MotCle,
         int Page = 1,
-        int Taille =20
+        int Taille = 20
     );
 }

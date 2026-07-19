@@ -81,6 +81,7 @@ namespace TabibPlus.Application.Auth.RegisterProfessionnel
                 Nom = cmd.Nom.ToUpper().Trim(),
                 Prenom = cmd.Prenom.Trim(),
                 Secteur = cmd.Secteur,
+                PhotoProfil = cmd.PhotoProfil,   // NOUVEAU
                 ProfilValide = true,
                 AccepteNouveauxPatients = true
             };

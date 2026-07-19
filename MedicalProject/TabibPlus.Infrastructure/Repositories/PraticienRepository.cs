@@ -26,19 +26,20 @@ namespace TabibPlus.Infrastructure.Repositories
 				.FirstOrDefaultAsync(p => p.Id == id
 					&& p.ProfilValide);
 
-		public async Task<IEnumerable<Praticien>> SearchAsync(
-			string? specialite,
-			string? ville,
-			string? secteur,
-			bool? teleconsult,
-			bool? disponibleAujourdhui)
-		{
-			var q = _db.Praticiens
+        public async Task<IEnumerable<Praticien>> SearchAsync(
+    string? specialite,
+    string? ville,
+    string? secteur,
+    bool? teleconsult,
+    bool? disponibleAujourdhui,
+    string? motCle)
+        {
+            var q = _db.Praticiens
                 .Include(p => p.Cabinet!.Ville)
                 .Include(p => p.Specialite)
                 .Include(p => p.Photos)
-				.Where(p => p.ProfilValide
-					&& p.AccepteNouveauxPatients);
+                .Where(p => p.ProfilValide
+                    && p.AccepteNouveauxPatients);
 
             if (!string.IsNullOrWhiteSpace(specialite))
                 q = q.Where(p =>
@@ -51,19 +52,33 @@ namespace TabibPlus.Infrastructure.Repositories
                     p.Cabinet.Ville != null &&
                     p.Cabinet.Ville.NomFr.ToLower()
                         .Contains(ville.ToLower()));
+
             if (!string.IsNullOrWhiteSpace(secteur))
-				q = q.Where(p => p.Secteur == secteur);
+                q = q.Where(p => p.Secteur == secteur);
 
-			if (teleconsult == true)
-				q = q.Where(p => p.AccepteTeleconsult);
+            if (teleconsult == true)
+                q = q.Where(p => p.AccepteTeleconsult);
 
-			return await q
-				.OrderByDescending(p => p.NoteMoyenne)
-				.ThenByDescending(p => p.NombreAvis)
-				.ToListAsync();
-		}
+            // NOUVEAU — recherche libre sur plusieurs champs à la fois
+            if (!string.IsNullOrWhiteSpace(motCle))
+            {
+                var mot = motCle.ToLower().Trim();
+                q = q.Where(p =>
+                    p.Nom.ToLower().Contains(mot) ||
+                    p.Prenom.ToLower().Contains(mot) ||
+                    (p.Specialite != null && p.Specialite.NomFr.ToLower().Contains(mot)) ||
+                    (p.Cabinet.Ville != null && p.Cabinet.Ville.NomFr.ToLower().Contains(mot)) ||
+                    (p.Bio != null && p.Bio.ToLower().Contains(mot))
+                );
+            }
 
-		public async Task AddAsync(Praticien praticien)
+            return await q
+                .OrderByDescending(p => p.NoteMoyenne)
+                .ThenByDescending(p => p.NombreAvis)
+                .ToListAsync();
+        }
+
+        public async Task AddAsync(Praticien praticien)
 		{
 			_db.Praticiens.Add(praticien);
 			await _db.SaveChangesAsync();

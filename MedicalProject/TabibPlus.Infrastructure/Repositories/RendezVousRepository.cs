@@ -1,6 +1,7 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using TabibPlus.Application.Interfaces;
 using TabibPlus.Core.Entities;
@@ -32,6 +33,18 @@ namespace TabibPlus.Infrastructure.Repositories
                 .OrderBy(r => r.DateHeure)
                 .ToListAsync();
 
+        public async Task<IEnumerable<RendezVous>>
+            GetByPraticienRangeAsync(int praticienId, DateTime dateDebut, DateTime dateFinExclusive)
+            => await _db.RendezVous
+                .Include(r => r.Patient)
+                .Where(r =>
+                    r.PraticienId == praticienId &&
+                    r.DateHeure.Date >= dateDebut.Date &&
+                    r.DateHeure.Date < dateFinExclusive.Date &&
+                    r.Statut != "Annule")
+                .OrderBy(r => r.DateHeure)
+                .ToListAsync();
+
         public async Task<bool> CreneauEstLibreAsync(
             int praticienId, DateTime dateHeure)
             => !await _db.RendezVous.AnyAsync(r =>
@@ -50,6 +63,34 @@ namespace TabibPlus.Infrastructure.Repositories
             rdv.ModifieLe = DateTime.UtcNow;
             _db.RendezVous.Update(rdv);
             await _db.SaveChangesAsync();
+        }
+
+        public async Task<(int RdvAujourdhui, int RdvCeMois, int NbPatientsUniques, int RdvTermines)>
+            GetStatsAsync(int praticienId)
+        {
+            var aujourdhui = DateTime.Today;
+            var debutMois = new DateTime(aujourdhui.Year, aujourdhui.Month, 1);
+
+            var rdvAujourdhui = await _db.RendezVous
+                .CountAsync(r => r.PraticienId == praticienId
+                    && r.DateHeure.Date == aujourdhui
+                    && r.Statut != "Annule");
+
+            var rdvCeMois = await _db.RendezVous
+                .CountAsync(r => r.PraticienId == praticienId
+                    && r.DateHeure >= debutMois
+                    && r.Statut != "Annule");
+
+            var nbPatientsUniques = await _db.RendezVous
+                .Where(r => r.PraticienId == praticienId)
+                .Select(r => r.PatientId)
+                .Distinct()
+                .CountAsync();
+
+            var rdvTermines = await _db.RendezVous
+                .CountAsync(r => r.PraticienId == praticienId && r.Statut == "Termine");
+
+            return (rdvAujourdhui, rdvCeMois, nbPatientsUniques, rdvTermines);
         }
     }
 }

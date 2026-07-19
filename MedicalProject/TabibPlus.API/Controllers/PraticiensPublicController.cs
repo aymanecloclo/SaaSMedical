@@ -23,14 +23,15 @@ namespace TabibPlus.API.Controllers
         // Page d'accueil — recherche publique sans JWT
         [HttpGet]
         public async Task<IActionResult> Search(
-            [FromQuery] string? specialite,
-            [FromQuery] string? ville,
-            [FromQuery] string? secteur,
-            [FromQuery] bool? teleconsult,
-            [FromQuery] bool? disponibleAujourdhui,
-            [FromQuery] string? langue,
-            [FromQuery] int page = 1,
-            [FromQuery] int taille = 20)
+      [FromQuery] string? specialite,
+      [FromQuery] string? ville,
+      [FromQuery] string? secteur,
+      [FromQuery] bool? teleconsult,
+      [FromQuery] bool? disponibleAujourdhui,
+      [FromQuery] string? langue,
+      [FromQuery] string? motCle,
+      [FromQuery] int page = 1,
+      [FromQuery] int taille = 20)
         {
             var query = new SearchPraticiensQuery(
                 specialite,
@@ -39,6 +40,7 @@ namespace TabibPlus.API.Controllers
                 teleconsult,
                 disponibleAujourdhui,
                 langue,
+                motCle,
                 page,
                 taille
             );

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
@@ -11,18 +11,20 @@ using TabibPlus.Application.Praticiens.SearchPraticiens;
 using TabibPlus.Application.RendezVous.ChangerStatut;
 using TabibPlus.Application.RendezVous.CreateRendezVous;
 using TabibPlus.Application.RendezVous.GetDisponibilites;
+using TabibPlus.Application.RendezVous.GetAgendaJour;
+using TabibPlus.Application.RendezVous.GetAgendaSemaine;
+using TabibPlus.Application.RendezVous.GetPraticienStats;
 using TabibPlus.Infrastructure.Data;
 using TabibPlus.Infrastructure.Repositories;
 using TabibPlus.Infrastructure.Services;
 using TabibPlus.Application.Auth.RegisterPatient;
-using TabibPlus.Application.Auth.RegisterPatient;
-using TabibPlus.Application.Interfaces;
 using TabibPlus.Application.Auth.RegisterProfessionnel;
 using TabibPlus.Application.Reference.GetSpecialites;
 using TabibPlus.Application.Reference.GetVilles;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// ── 1. Base de données ────────────────────────────
+// ── 1. Base de données ────────────────────────────────
 builder.Services.AddDbContext<TabibPlusDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration
@@ -30,7 +32,7 @@ builder.Services.AddDbContext<TabibPlusDbContext>(options =>
     )
 );
 
-// ── 2. Repositories (Infrastructure) ─────────────
+// ── 2. Repositories (Infrastructure) ──────────────────
 builder.Services
     .AddScoped<IPatientRepository, PatientRepository>();
 builder.Services
@@ -42,7 +44,7 @@ builder.Services
 builder.Services
     .AddScoped<IVilleRepository, VilleRepository>();
 
-// ── 3. Services (Infrastructure) ─────────────────
+// ── 3. Services (Infrastructure) ──────────────────────
 builder.Services
     .AddScoped<ISmsService, SmsService>();
 builder.Services
@@ -52,7 +54,7 @@ builder.Services
 builder.Services
     .AddScoped<ICabinetRepository, CabinetRepository>();
 
-// ── 4. Handlers (Application) ────────────────────
+// ── 4. Handlers (Application) ─────────────────────────
 builder.Services.AddScoped<CreatePatientHandler>();
 builder.Services.AddScoped<GetPatientsHandler>();
 builder.Services.AddScoped<SearchPraticiensHandler>();
@@ -60,12 +62,15 @@ builder.Services.AddScoped<GetPraticienByIdHandler>();
 builder.Services.AddScoped<CreateRendezVousHandler>();
 builder.Services.AddScoped<GetDisponibilitesHandler>();
 builder.Services.AddScoped<ChangerStatutHandler>();
+builder.Services.AddScoped<GetAgendaJourHandler>();
+builder.Services.AddScoped<GetAgendaSemaineHandler>();
+builder.Services.AddScoped<GetPraticienStatsHandler>();
 builder.Services.AddScoped<RegisterPatientHandler>();
 builder.Services.AddScoped<RegisterProfessionnelHandler>();
 builder.Services.AddScoped<GetSpecialitesHandler>();
 builder.Services.AddScoped<GetVillesHandler>();
 
-// ── 5. JWT ────────────────────────────────────────
+// ── 5. JWT ─────────────────────────────────────────────
 var jwtKey = builder.Configuration["Jwt:Key"]!;
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -96,9 +101,7 @@ builder.Services.AddAuthorization(options =>
         p => p.RequireRole("Admin", "Praticien", "Secretaire"));
 });
 
-
-
-// ── 6. CORS ───────────────────────────────────────
+// ── 6. CORS ────────────────────────────────────────────
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("FrontendPolicy", policy =>
@@ -109,12 +112,12 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 });
 
-// ── 7. Controllers + Swagger ──────────────────────
+// ── 7. Controllers + Swagger ───────────────────────────
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 var app = builder.Build();
 
-// ── 8. Migration automatique ──────────────────────
+// ── 8. Migration automatique ───────────────────────────
 if (app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();
@@ -123,10 +126,10 @@ if (app.Environment.IsDevelopment())
     db.Database.Migrate();
 }
 
-// ── 9. Pipeline HTTP ──────────────────────────────
+// ── 9. Pipeline HTTP ────────────────────────────────────
 app.MapOpenApi();
 app.MapScalarApiReference();
-app.UseStaticFiles();   // ← NOUVEAU : sert wwwroot/uploads/xxx.jpg
+app.UseStaticFiles();
 app.UseCors("FrontendPolicy");
 app.UseAuthentication();
 app.UseAuthorization();

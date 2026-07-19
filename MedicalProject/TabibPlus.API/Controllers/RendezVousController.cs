@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using TabibPlus.Application.RendezVous.ChangerStatut;
 using TabibPlus.Application.RendezVous.CreateRendezVous;
+using TabibPlus.Application.RendezVous.GetAgendaJour;
+using TabibPlus.Application.RendezVous.GetAgendaSemaine;
 using TabibPlus.Application.RendezVous.GetDisponibilites;
+using TabibPlus.Application.RendezVous.GetPraticienStats;
 using TabibPlus.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,22 +18,35 @@ namespace TabibPlus.API.Controllers
         private readonly CreateRendezVousHandler _createHandler;
         private readonly GetDisponibilitesHandler _dispoHandler;
         private readonly ChangerStatutHandler _statutHandler;
+        private readonly GetAgendaJourHandler _agendaJourHandler;
+        private readonly GetAgendaSemaineHandler _agendaSemaineHandler;
+        private readonly GetPraticienStatsHandler _statsHandler;
         private readonly TabibPlusDbContext _db;
 
         public RendezVousController(
             CreateRendezVousHandler createHandler,
             GetDisponibilitesHandler dispoHandler,
             ChangerStatutHandler statutHandler,
+            GetAgendaJourHandler agendaJourHandler,
+            GetAgendaSemaineHandler agendaSemaineHandler,
+            GetPraticienStatsHandler statsHandler,
             TabibPlusDbContext db)
         {
             _createHandler = createHandler;
             _dispoHandler = dispoHandler;
             _statutHandler = statutHandler;
+            _agendaJourHandler = agendaJourHandler;
+            _agendaSemaineHandler = agendaSemaineHandler;
+            _statsHandler = statsHandler;
             _db = db;
         }
 
-        // ── GET /api/rendezvous/disponibilites?praticienId=1&date=2025-06-01
-        // Public — le patient voit les créneaux libres
+        private int? GetPraticienIdDuToken()
+        {
+            var claim = User.FindFirst("praticienId")?.Value;
+            return int.TryParse(claim, out var id) ? id : null;
+        }
+
         [HttpGet("disponibilites")]
         public async Task<IActionResult> GetDisponibilites(
             [FromQuery] int praticienId,
@@ -41,46 +57,45 @@ namespace TabibPlus.API.Controllers
             return Ok(result);
         }
 
-        // ── GET /api/rendezvous?praticienId=1&date=2025-06-01
-        // Privé — agenda du praticien
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetAgenda(
-            [FromQuery] int praticienId,
-            [FromQuery] DateTime date)
+        [HttpGet("agenda")]
+        [Authorize(Policy = "Praticien")]
+        public async Task<IActionResult> GetAgenda([FromQuery] DateTime date)
         {
-            var rdvs = await _db.RendezVous
-                .Include(r => r.Patient)
-                .Where(r =>
-                    r.PraticienId == praticienId &&
-                    r.DateHeure.Date == date.Date &&
-                    r.Statut != "Annule")
-                .OrderBy(r => r.DateHeure)
-                .Select(r => new
-                {
-                    r.Id,
-                    r.DateHeure,
-                    r.DureeMinutes,
-                    r.Motif,
-                    r.Statut,
-                    r.EstTeleconsultation,
-                    r.Source,
-                    patient = new
-                    {
-                        r.Patient.Id,
-                        r.Patient.Nom,
-                        r.Patient.Prenom,
-                        r.Patient.Telephone,
-                        r.Patient.Allergies
-                    }
-                })
-                .ToListAsync();
+            var praticienId = GetPraticienIdDuToken();
+            if (praticienId == null)
+                return Forbid();
 
-            return Ok(rdvs);
+            var result = await _agendaJourHandler.Handle(
+                new GetAgendaJourQuery(praticienId.Value, date));
+            return Ok(result);
         }
 
-        // ── POST /api/rendezvous
-        // Réserver un RDV
+        [HttpGet("agenda-semaine")]
+        [Authorize(Policy = "Praticien")]
+        public async Task<IActionResult> GetAgendaSemaine([FromQuery] DateTime dateDebut)
+        {
+            var praticienId = GetPraticienIdDuToken();
+            if (praticienId == null)
+                return Forbid();
+
+            var result = await _agendaSemaineHandler.Handle(
+                new GetAgendaSemaineQuery(praticienId.Value, dateDebut));
+            return Ok(result);
+        }
+
+        [HttpGet("stats")]
+        [Authorize(Policy = "Praticien")]
+        public async Task<IActionResult> GetStats()
+        {
+            var praticienId = GetPraticienIdDuToken();
+            if (praticienId == null)
+                return Forbid();
+
+            var result = await _statsHandler.Handle(
+                new GetPraticienStatsQuery(praticienId.Value));
+            return Ok(result);
+        }
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(
@@ -101,10 +116,8 @@ namespace TabibPlus.API.Controllers
             }
         }
 
-        // ── PUT /api/rendezvous/{id}/statut
-        // Changer statut : Arrivé, En consultation, Terminé...
         [HttpPut("{id}/statut")]
-        [Authorize]
+        [Authorize(Policy = "Staff")]
         public async Task<IActionResult> ChangerStatut(
             int id,
             [FromBody] ChangerStatutCommand cmd)
@@ -125,7 +138,6 @@ namespace TabibPlus.API.Controllers
             }
         }
 
-        // ── GET /api/rendezvous/{id}
         [HttpGet("{id}")]
         [Authorize]
         public async Task<IActionResult> GetById(int id)
@@ -136,10 +148,7 @@ namespace TabibPlus.API.Controllers
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             if (rdv == null)
-                return NotFound(new
-                {
-                    message = "RDV introuvable"
-                });
+                return NotFound(new { message = "RDV introuvable" });
 
             return Ok(rdv);
         }

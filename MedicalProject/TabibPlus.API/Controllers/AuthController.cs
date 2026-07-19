@@ -64,11 +64,12 @@ namespace TabibPlus.API.Controllers
                     user.Role,
                     praticienId = user.Praticien?.Id,
                     patientId = patient?.Id,
+                    photoUrl = user.Praticien?.PhotoProfil,   // NOUVEAU
                     nom = user.Praticien != null
-                        ? $"Dr. {user.Praticien.Prenom} {user.Praticien.Nom}"
-                        : patient != null
-                            ? $"{patient.Prenom} {patient.Nom}"
-                            : user.Email
+            ? $"Dr. {user.Praticien.Prenom} {user.Praticien.Nom}"
+            : patient != null
+                ? $"{patient.Prenom} {patient.Nom}"
+                : user.Email
                 }
             });
         }

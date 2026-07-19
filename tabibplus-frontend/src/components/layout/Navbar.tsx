@@ -8,7 +8,7 @@ import {
   Menu,
 } from "lucide-react";
 import { useAuth } from "../../features/auth/AuthContext";
-
+import { getImageUrl } from "../../lib/getImageUrl";
 export function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
@@ -35,9 +35,7 @@ export function Navbar() {
               TabibPlus
             </h1>
 
-            <p className="text-xs text-gray-500">
-              Plateforme Médicale
-            </p>
+            <p className="text-xs text-gray-500">Plateforme Médicale</p>
           </div>
         </Link>
 
@@ -117,18 +115,24 @@ export function Navbar() {
 
               {/* Profil */}
               <div className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-3 py-2 shadow-sm">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white">
-                  <User size={18} />
-                </div>
+                {user?.photoUrl ? (
+                  <img
+                    src={getImageUrl(user.photoUrl)}
+                    alt={user.nom}
+                    className="h-10 w-10 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white">
+                    <User size={18} />
+                  </div>
+                )}
 
                 <div className="hidden lg:block">
                   <p className="text-sm font-semibold text-gray-900">
                     {user?.nom}
                   </p>
 
-                  <p className="text-xs text-gray-500">
-                    Connecté
-                  </p>
+                  <p className="text-xs text-gray-500">Connecté</p>
                 </div>
               </div>
 

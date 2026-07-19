@@ -1,5 +1,11 @@
 import { useState, useMemo } from "react";
-import { Loader2, Stethoscope, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Loader2,
+  Stethoscope,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+} from "lucide-react";
 import { useSearchPraticiens } from "../hooks/useSearchPraticiens";
 import { PraticienCard } from "../components/PraticienCard";
 import { SearchFiltersPanel } from "../components/SearchFilters";
@@ -10,7 +16,7 @@ export function SearchPage() {
   const [sort, setSort] = useState<SortOption>("note");
 
   const { data, isLoading, isError } = useSearchPraticiens(filters);
-
+  console.log(data);
   // Tri côté front — s'applique uniquement aux praticiens de la page actuelle
   const praticiensTries = useMemo(() => {
     if (!data?.items) return [];
@@ -51,7 +57,26 @@ export function SearchPage() {
           Filtrez par spécialité, ville, secteur et réservez en ligne
         </p>
       </div>
-
+      {/* Barre de recherche libre */}
+      <div className="mb-6 relative">
+        <Search
+          size={20}
+          className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+        />
+        <input
+          type="text"
+          placeholder="Rechercher par nom, spécialité, ville..."
+          value={filters.motCle ?? ""}
+          onChange={(e) =>
+            setFilters((prev) => ({
+              ...prev,
+              motCle: e.target.value || undefined,
+              page: 1,
+            }))
+          }
+          className="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-gray-900 shadow-sm transition focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
+        />
+      </div>
       {/* Layout : sidebar + résultats */}
       <div className="flex flex-col gap-6 lg:flex-row">
         <SearchFiltersPanel

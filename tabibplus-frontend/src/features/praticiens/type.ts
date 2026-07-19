@@ -1,9 +1,9 @@
-export interface Praticien {
+﻿export interface Praticien {
   id: number;
   nom: string;
   prenom: string;
   nomComplet: string;
-  specialite: string; // ⚠️ backend renvoie le cabinet ici (bug à corriger)
+  specialite: string;
   photoProfil: string | null;
   ville: string;
   honoraires: number;
@@ -16,10 +16,8 @@ export interface Praticien {
   anneesExperience: number;
 }
 
-
-
 export type SortOption = "note" | "prix_asc" | "prix_desc";
-// Détail complet d'un praticien — correspond au PraticienDetailDto backend
+
 export interface PraticienDetail {
   id: number;
   nomComplet: string;
@@ -48,7 +46,8 @@ export interface SearchFilters {
   ville?: string;
   secteur?: string;
   teleconsult?: boolean;
-  page?: number; 
+  motCle?: string;
+  page?: number;
 }
 
 export interface PraticienPage {

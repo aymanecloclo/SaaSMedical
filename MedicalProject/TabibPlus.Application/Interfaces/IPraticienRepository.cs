@@ -13,7 +13,8 @@ namespace TabibPlus.Application.Interfaces
             string? ville,
             string? secteur,
             bool? teleconsult,
-            bool? disponibleAujourdhui);
+            bool? disponibleAujourdhui,
+            string? motCle);
         Task AddAsync(Praticien praticien);
         Task UpdateAsync(Praticien praticien);
         Task<IEnumerable<DateTime>> GetDisponibilitesAsync(
