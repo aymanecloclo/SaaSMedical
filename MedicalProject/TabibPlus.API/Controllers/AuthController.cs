@@ -1,3 +1,4 @@
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +11,8 @@ using TabibPlus.Core.Entities;
 using TabibPlus.Infrastructure.Data;
 using TabibPlus.Application.Auth.RegisterPatient;
 using TabibPlus.Application.Auth.RegisterProfessionnel;
+using TabibPlus.Application.Auth.RegisterSecretaire;
+
 namespace TabibPlus.API.Controllers
 {
     [ApiController]
@@ -20,15 +23,20 @@ namespace TabibPlus.API.Controllers
         private readonly IConfiguration _config;
         private readonly RegisterPatientHandler _registerPatientHandler;
         private readonly RegisterProfessionnelHandler _registerProfessionnelHandler;
+        private readonly RegisterSecretaireHandler _registerSecretaireHandler;
+
         public AuthController(
             TabibPlusDbContext db,
             IConfiguration config,
-            RegisterPatientHandler registerPatientHandler,RegisterProfessionnelHandler registerProfessionnelHandler)
+            RegisterPatientHandler registerPatientHandler,
+            RegisterProfessionnelHandler registerProfessionnelHandler,
+            RegisterSecretaireHandler registerSecretaireHandler)
         {
             _db = db;
             _config = config;
             _registerPatientHandler = registerPatientHandler;
             _registerProfessionnelHandler = registerProfessionnelHandler;
+            _registerSecretaireHandler = registerSecretaireHandler;
         }
 
         [HttpPost("login")]
@@ -45,7 +53,6 @@ namespace TabibPlus.API.Controllers
             if (!valide)
                 return Unauthorized(new { message = "Email ou mot de passe incorrect" });
 
-            // NOUVEAU : on cherche le Patient lié à ce User (peut être null si c'est un praticien)
             var patient = await _db.Patients
                 .FirstOrDefaultAsync(p => p.UserId == user.Id && p.Actif);
 
@@ -64,17 +71,17 @@ namespace TabibPlus.API.Controllers
                     user.Role,
                     praticienId = user.Praticien?.Id,
                     patientId = patient?.Id,
-                    photoUrl = user.Praticien?.PhotoProfil,   // NOUVEAU
+                    cabinetId = user.CabinetId,
+                    photoUrl = user.Praticien?.PhotoProfil,
                     nom = user.Praticien != null
-            ? $"Dr. {user.Praticien.Prenom} {user.Praticien.Nom}"
-            : patient != null
-                ? $"{patient.Prenom} {patient.Nom}"
-                : user.Email
+                        ? $"Dr. {user.Praticien.Prenom} {user.Praticien.Nom}"
+                        : patient != null
+                            ? $"{patient.Prenom} {patient.Nom}"
+                            : user.Email
                 }
             });
         }
 
-        // ── POST /api/auth/register (ancien, à garder pour l'instant) ──────
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
@@ -94,10 +101,8 @@ namespace TabibPlus.API.Controllers
             return Ok(new { message = "Compte créé avec succès", userId = user.Id });
         }
 
-        // ── POST /api/auth/register/patient (nouveau, pattern Handler) ─────
         [HttpPost("register/patient")]
-        public async Task<IActionResult> RegisterPatient(
-            [FromBody] RegisterPatientCommand cmd)
+        public async Task<IActionResult> RegisterPatient([FromBody] RegisterPatientCommand cmd)
         {
             try
             {
@@ -113,10 +118,9 @@ namespace TabibPlus.API.Controllers
                 return Conflict(new { message = ex.Message });
             }
         }
-        // ── POST /api/auth/register/professionnel ─────────────────────────
+
         [HttpPost("register/professionnel")]
-        public async Task<IActionResult> RegisterProfessionnel(
-            [FromBody] RegisterProfessionnelCommand cmd)
+        public async Task<IActionResult> RegisterProfessionnel([FromBody] RegisterProfessionnelCommand cmd)
         {
             try
             {
@@ -132,7 +136,41 @@ namespace TabibPlus.API.Controllers
                 return Conflict(new { message = ex.Message });
             }
         }
-        // ── Génération JWT ────────────────────────────────────────────────
+
+        // ── POST /api/auth/register-secretaire ──
+        // Réservé aux praticiens connectés — ils inscrivent LEUR secrétaire.
+        // CabinetId n'est JAMAIS pris depuis le body : il est déduit du cabinet
+        // du praticien qui fait la demande, via son propre JWT.
+        [HttpPost("register-secretaire")]
+        [Authorize(Policy = "Praticien")]
+        public async Task<IActionResult> RegisterSecretaire([FromBody] RegisterSecretaireCommand dto)
+        {
+            var praticienIdClaim = User.FindFirst("praticienId")?.Value;
+            if (!int.TryParse(praticienIdClaim, out var praticienId))
+                return Forbid();
+
+            var praticien = await _db.Praticiens.FindAsync(praticienId);
+            if (praticien == null)
+                return Forbid();
+
+            // On ignore tout CabinetId envoyé par le client — on force celui du praticien
+            var cmdSecurise = dto with { CabinetId = praticien.CabinetId };
+
+            try
+            {
+                var userId = await _registerSecretaireHandler.Handle(cmdSecurise);
+                return Ok(new { message = "Compte secrétaire créé avec succès", userId });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new { message = ex.Message });
+            }
+        }
+
         private string GenererToken(User user, int? patientId)
         {
             var key = new SymmetricSecurityKey(
@@ -141,12 +179,13 @@ namespace TabibPlus.API.Controllers
 
             var claims = new[]
             {
-        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new Claim(ClaimTypes.Email, user.Email),
-        new Claim(ClaimTypes.Role, user.Role),
-        new Claim("praticienId", user.Praticien?.Id.ToString() ?? ""),
-        new Claim("patientId", patientId?.ToString() ?? "")
-    };
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim("praticienId", user.Praticien?.Id.ToString() ?? ""),
+                new Claim("patientId", patientId?.ToString() ?? ""),
+                new Claim("cabinetId", user.CabinetId?.ToString() ?? "")
+            };
 
             var expiration = int.Parse(_config["Jwt:ExpirationHours"] ?? "8");
             var token = new JwtSecurityToken(
@@ -161,7 +200,6 @@ namespace TabibPlus.API.Controllers
         }
     }
 
-    // ── DTOs ──────────────────────────────────────────────────────────────
     public record LoginDto(string Email, string MotDePasse);
     public record RegisterDto(string Email, string MotDePasse, string? Role);
 }

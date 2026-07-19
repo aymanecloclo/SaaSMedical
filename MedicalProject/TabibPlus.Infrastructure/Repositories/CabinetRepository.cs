@@ -1,3 +1,4 @@
+﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using TabibPlus.Application.Interfaces;
 using TabibPlus.Core.Entities;
@@ -16,7 +17,10 @@ namespace TabibPlus.Infrastructure.Repositories
         {
             _db.Cabinets.Add(cabinet);
             await _db.SaveChangesAsync();
-            return cabinet.Id;   // Id généré par la DB après SaveChanges
+            return cabinet.Id;
         }
+
+        public async Task<Cabinet?> GetByIdAsync(int id)
+            => await _db.Cabinets.FindAsync(id);
     }
 }

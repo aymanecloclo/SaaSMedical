@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1Bp/CHTBRtE=",
+  "dgSpecHash": "NZs9defRP3o=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj",
+  "projectFilePath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hj\\.nuget\\packages\\bcrypt.net-next\\4.2.0\\bcrypt.net-next.4.2.0.nupkg.sha512"
   ],

@@ -12,23 +12,25 @@ namespace TabibPlus.Core.Entities
         public string Email { get; set; } = string.Empty;
         public string PasswordHash { get; set; } = string.Empty;
         public string Role { get; set; } = "Secretaire";
-        // Admin | Praticien | Secretaire | Patient
+        public string? Nom { get; set; }       // NOUVEAU — utile pour Secretaire/Admin (pas de fiche Patient/Praticien)
+        public string? Prenom { get; set; }    // NOUVEAU
         public string TypeCompte { get; set; } = "Patient";
-        // "Patient" ou "Professionnel"
         public string? Telephone { get; set; }
         public string? PhotoUrl { get; set; }
         public string Langue { get; set; } = "FR";
-        // FR | AR | EN
         public bool NotificationsEmail { get; set; } = true;
         public bool NotificationsSms { get; set; } = true;
         public bool Actif { get; set; } = true;
         public DateTime CreeLe { get; set; } = DateTime.UtcNow;
         public DateTime? DerniereConnexion { get; set; }
 
+        // Lié uniquement pour un compte Secrétaire — le cabinet dans lequel elle travaille
+        public int? CabinetId { get; set; }
+
         // Navigation
         public Praticien? Praticien { get; set; }
+        public Cabinet? Cabinet { get; set; }
     }
-
     // ─────────────────────────────────────────────
     // CABINET
     // ─────────────────────────────────────────────

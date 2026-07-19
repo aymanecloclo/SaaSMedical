@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj": {}
+    "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj": {
+    "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj",
+        "projectUniqueName": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj",
         "projectName": "TabibPlus.Application",
-        "projectPath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj",
+        "projectPath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Application\\TabibPlus.Application.csproj",
         "packagesPath": "C:\\Users\\hj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Application\\obj\\",
+        "outputPath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
             "framework": "net9.0",
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj": {
-                "projectPath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj"
+              "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj": {
+                "projectPath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj"
               }
             }
           }
@@ -81,14 +81,14 @@
         }
       }
     },
-    "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj": {
+    "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj",
+        "projectUniqueName": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj",
         "projectName": "TabibPlus.Core",
-        "projectPath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj",
+        "projectPath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj",
         "packagesPath": "C:\\Users\\hj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\obj\\",
+        "outputPath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

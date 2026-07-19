@@ -1,15 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\TabibPlus.API",
-    "\\TabibPlus.API\\Controllers",
     "\\TabibPlus.API\\Properties",
     "\\TabibPlus.API\\wwwroot",
-    "\\TabibPlus.API\\wwwroot\\uploads\\praticiens",
-    "\\TabibPlus.Application\\Auth",
     "\\TabibPlus.Application\\Auth\\RegisterProfessionnel",
+    "\\TabibPlus.Infrastructure",
+    "\\TabibPlus.Infrastructure\\Data",
+    "\\TabibPlus.Infrastructure\\Migrations",
     "\\TabibPlus.Infrastructure\\Repositories"
   ],
-  "SelectedNode": "\\TabibPlus.API\\Controllers\\UploadController.cs",
+  "SelectedNode": "\\.dockerignore",
   "PreviewInSolutionExplorer": false
 }

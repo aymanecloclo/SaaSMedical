@@ -699,6 +699,9 @@ namespace TabibPlus.Infrastructure.Migrations
                     b.Property<bool>("Actif")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("CabinetId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreeLe")
                         .HasColumnType("datetime2");
 
@@ -713,6 +716,9 @@ namespace TabibPlus.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Nom")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("NotificationsEmail")
                         .HasColumnType("bit");
 
@@ -724,6 +730,9 @@ namespace TabibPlus.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prenom")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
@@ -744,6 +753,8 @@ namespace TabibPlus.Infrastructure.Migrations
                         .HasDefaultValue("Patient");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CabinetId");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -998,6 +1009,16 @@ namespace TabibPlus.Infrastructure.Migrations
                     b.Navigation("Patient");
 
                     b.Navigation("Praticien");
+                });
+
+            modelBuilder.Entity("TabibPlus.Core.Entities.User", b =>
+                {
+                    b.HasOne("TabibPlus.Core.Entities.Cabinet", "Cabinet")
+                        .WithMany()
+                        .HasForeignKey("CabinetId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Cabinet");
                 });
 
             modelBuilder.Entity("TabibPlus.Core.Entities.Cabinet", b =>

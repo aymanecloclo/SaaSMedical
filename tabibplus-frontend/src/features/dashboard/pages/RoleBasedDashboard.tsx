@@ -1,6 +1,8 @@
 ﻿import { Navigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { PraticienDashboardPage } from "./PraticienDashboardPage";
+import { PatientDashboardPage } from "../../patient-dashboard/pages/PatientDashboardPage";
+import { SecretaireDashboardPage } from "../../secretaire-dashboard/pages/SecretaireDashboardPage";
 
 export function RoleBasedDashboard() {
   const { user } = useAuth();
@@ -10,13 +12,11 @@ export function RoleBasedDashboard() {
   }
 
   if (user?.role === "Patient") {
-    // Dashboard patient pas encore construit — redirection temporaire
-    return <Navigate to="/" replace />;
+    return <PatientDashboardPage />;
   }
 
   if (user?.role === "Secretaire") {
-    // Dashboard secrétaire pas encore construit — redirection temporaire
-    return <Navigate to="/" replace />;
+    return <SecretaireDashboardPage />;
   }
 
   return <Navigate to="/" replace />;

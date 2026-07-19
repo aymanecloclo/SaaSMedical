@@ -6,6 +6,7 @@ using TabibPlus.Application.RendezVous.GetAgendaJour;
 using TabibPlus.Application.RendezVous.GetAgendaSemaine;
 using TabibPlus.Application.RendezVous.GetDisponibilites;
 using TabibPlus.Application.RendezVous.GetPraticienStats;
+using TabibPlus.Application.RendezVous.GetMesRendezVous;
 using TabibPlus.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,7 @@ namespace TabibPlus.API.Controllers
         private readonly GetAgendaJourHandler _agendaJourHandler;
         private readonly GetAgendaSemaineHandler _agendaSemaineHandler;
         private readonly GetPraticienStatsHandler _statsHandler;
+        private readonly GetMesRendezVousHandler _mesRdvHandler;
         private readonly TabibPlusDbContext _db;
 
         public RendezVousController(
@@ -30,6 +32,7 @@ namespace TabibPlus.API.Controllers
             GetAgendaJourHandler agendaJourHandler,
             GetAgendaSemaineHandler agendaSemaineHandler,
             GetPraticienStatsHandler statsHandler,
+            GetMesRendezVousHandler mesRdvHandler,
             TabibPlusDbContext db)
         {
             _createHandler = createHandler;
@@ -38,12 +41,25 @@ namespace TabibPlus.API.Controllers
             _agendaJourHandler = agendaJourHandler;
             _agendaSemaineHandler = agendaSemaineHandler;
             _statsHandler = statsHandler;
+            _mesRdvHandler = mesRdvHandler;
             _db = db;
         }
 
         private int? GetPraticienIdDuToken()
         {
             var claim = User.FindFirst("praticienId")?.Value;
+            return int.TryParse(claim, out var id) ? id : null;
+        }
+
+        private int? GetPatientIdDuToken()
+        {
+            var claim = User.FindFirst("patientId")?.Value;
+            return int.TryParse(claim, out var id) ? id : null;
+        }
+
+        private int? GetCabinetIdDuToken()
+        {
+            var claim = User.FindFirst("cabinetId")?.Value;
             return int.TryParse(claim, out var id) ? id : null;
         }
 
@@ -96,11 +112,43 @@ namespace TabibPlus.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("mes-rendezvous")]
+        [Authorize]
+        public async Task<IActionResult> GetMesRendezVous([FromQuery] bool aVenir = true)
+        {
+            var patientId = GetPatientIdDuToken();
+            if (patientId == null)
+                return Forbid();
+
+            var result = await _mesRdvHandler.Handle(
+                new GetMesRendezVousQuery(patientId.Value, aVenir));
+            return Ok(result);
+        }
+
+        // ── POST /api/rendezvous ──
+        // Utilisé par : le patient (réservation en ligne) ET la secrétaire (walk-in/téléphone)
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(
-            [FromBody] CreateRendezVousCommand cmd)
+        public async Task<IActionResult> Create([FromBody] CreateRendezVousCommand cmd)
         {
+            // Vérifie que le praticien demandé appartient bien au cabinet indiqué —
+            // protège contre une incohérence (accidentelle ou volontaire) entre praticienId et cabinetId
+            var praticien = await _db.Praticiens.FindAsync(cmd.PraticienId);
+            if (praticien == null)
+                return BadRequest(new { message = "Praticien introuvable" });
+
+            if (praticien.CabinetId != cmd.CabinetId)
+                return BadRequest(new { message = "Ce praticien n'appartient pas à ce cabinet" });
+
+            // Si c'est une secrétaire qui crée le RDV, elle ne peut agir QUE
+            // pour les praticiens de SON PROPRE cabinet — jamais un autre
+            if (User.IsInRole("Secretaire"))
+            {
+                var cabinetIdSecretaire = GetCabinetIdDuToken();
+                if (cabinetIdSecretaire == null || praticien.CabinetId != cabinetIdSecretaire.Value)
+                    return Forbid();
+            }
+
             try
             {
                 var id = await _createHandler.Handle(cmd);
@@ -131,6 +179,32 @@ namespace TabibPlus.API.Controllers
             catch (KeyNotFoundException ex)
             {
                 return NotFound(new { message = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("{id}/annuler")]
+        [Authorize]
+        public async Task<IActionResult> Annuler(int id)
+        {
+            var patientId = GetPatientIdDuToken();
+            if (patientId == null)
+                return Forbid();
+
+            var rdv = await _db.RendezVous.FindAsync(id);
+            if (rdv == null)
+                return NotFound(new { message = "RDV introuvable" });
+
+            if (rdv.PatientId != patientId.Value)
+                return Forbid();
+
+            try
+            {
+                await _statutHandler.Handle(new ChangerStatutCommand(id, "Annule", null));
+                return NoContent();
             }
             catch (ArgumentException ex)
             {

@@ -45,6 +45,33 @@ namespace TabibPlus.Infrastructure.Repositories
                 .OrderBy(r => r.DateHeure)
                 .ToListAsync();
 
+        public async Task<IEnumerable<RendezVous>>
+            GetByPatientAsync(int patientId, bool aVenir)
+        {
+            var maintenant = DateTime.Now;
+
+            var baseQuery = _db.RendezVous
+                .Include(r => r.Praticien)
+                    .ThenInclude(p => p.Specialite)
+                .Include(r => r.Praticien)
+                    .ThenInclude(p => p.Cabinet)
+                        .ThenInclude(c => c.Ville)
+                .Where(r => r.PatientId == patientId);
+
+            if (aVenir)
+            {
+                return await baseQuery
+                    .Where(r => r.DateHeure >= maintenant && r.Statut != "Annule")
+                    .OrderBy(r => r.DateHeure)
+                    .ToListAsync();
+            }
+
+            return await baseQuery
+                .Where(r => r.DateHeure < maintenant || r.Statut == "Termine" || r.Statut == "Annule")
+                .OrderByDescending(r => r.DateHeure)
+                .ToListAsync();
+        }
+
         public async Task<bool> CreneauEstLibreAsync(
             int praticienId, DateTime dateHeure)
             => !await _db.RendezVous.AnyAsync(r =>

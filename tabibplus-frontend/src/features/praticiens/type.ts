@@ -39,6 +39,7 @@ export interface PraticienDetail {
   longitude: number | null;
   siteWeb: string | null;
   telephone: string | null;
+  cabinetId: number;
 }
 
 export interface SearchFilters {

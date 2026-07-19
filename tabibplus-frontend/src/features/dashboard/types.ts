@@ -58,3 +58,50 @@ export const STATUT_COULEURS: Record<string, string> = {
   Reporte: "bg-orange-100 text-orange-700",
   Annule: "bg-red-100 text-red-700",
 };
+
+export interface SecretaireDuCabinet {
+  id: number;
+  nom: string;
+  prenom: string;
+  email: string;
+  telephone: string;
+  creeLe: string;
+}
+
+export interface MonCabinetInfo {
+  praticien: {
+    id: number;
+    nom: string;
+    prenom: string;
+    photoProfil: string | null;
+    specialite: string;
+    bio: string | null;
+    anneesExperience: number;
+    honoraires: number;
+    secteur: string;
+  };
+  cabinet: {
+    id: number;
+    nom: string;
+    adresse: string;
+    ville: string;
+    telephone: string;
+  };
+}
+
+export interface PlageHoraireJour {
+  id?: number;
+  jourSemaine: number;   // 1=Lundi ... 6=Samedi
+  heureDebut: string;    // "09:00"
+  heureFin: string;      // "17:00"
+  actif: boolean;
+}
+
+export const JOURS_SEMAINE = [
+  { valeur: 1, label: "Lundi" },
+  { valeur: 2, label: "Mardi" },
+  { valeur: 3, label: "Mercredi" },
+  { valeur: 4, label: "Jeudi" },
+  { valeur: 5, label: "Vendredi" },
+  { valeur: 6, label: "Samedi" },
+];

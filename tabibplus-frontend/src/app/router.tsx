@@ -5,10 +5,11 @@ import { Layout } from "../components/layout/Layout";
 import { RegisterChoicePage } from "../features/auth/pages/RegisterChoicePage";
 import { RegisterPatientPage } from "../features/auth/pages/RegisterPatientPage";
 import { RegisterProfessionnelPage } from "../features/auth/pages/RegisterProfessionnelPage";
-
+import { MonProfilPage } from "../features/patient-dashboard/pages/MonProfilPage";
 import { PraticienProfilePage } from "../features/praticiens/pages/PraticienProfilePage";
 import { SearchPage } from "../features/praticiens/pages/SearchPage";
 import { RoleBasedDashboard } from "../features/dashboard/pages/RoleBasedDashboard";
+import { ReservationPage } from "../features/rendezvous/pages/ReservationPage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +17,26 @@ export const router = createBrowserRouter([
       <Layout>
         <SearchPage />
       </Layout>
+    ),
+  },
+  {
+    path: "/praticiens/:id/reserver",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <ReservationPage />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/profil",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <MonProfilPage />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {

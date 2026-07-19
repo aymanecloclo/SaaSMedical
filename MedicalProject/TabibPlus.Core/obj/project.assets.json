@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj",
+      "projectUniqueName": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj",
       "projectName": "TabibPlus.Core",
-      "projectPath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj",
+      "projectPath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\TabibPlus.Core.csproj",
       "packagesPath": "C:\\Users\\hj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Core\\obj\\",
+      "outputPath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -12,6 +12,8 @@ namespace TabibPlus.Application.Interfaces
             int praticienId, DateTime date);
         Task<IEnumerable<TabibPlus.Core.Entities.RendezVous>> GetByPraticienRangeAsync(
             int praticienId, DateTime dateDebut, DateTime dateFinExclusive);
+        Task<IEnumerable<TabibPlus.Core.Entities.RendezVous>> GetByPatientAsync(
+            int patientId, bool aVenir);
         Task<bool> CreneauEstLibreAsync(
             int praticienId, DateTime dateHeure);
         Task AddAsync(TabibPlus.Core.Entities.RendezVous rdv);

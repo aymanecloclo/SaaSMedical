@@ -29,6 +29,7 @@ namespace TabibPlus.Infrastructure.Data
         {
             base.OnModelCreating(builder);
 
+ 
             // ── User ────────────────────────────────
             builder.Entity<User>(e =>
             {
@@ -39,6 +40,11 @@ namespace TabibPlus.Infrastructure.Data
                 e.Property(u => u.TypeCompte)
                     .HasDefaultValue("Patient")
                     .HasMaxLength(20);
+
+                e.HasOne(u => u.Cabinet)
+                    .WithMany()
+                    .HasForeignKey(u => u.CabinetId)
+                    .OnDelete(DeleteBehavior.SetNull);
             });
             // ── Cabinet ──────────────────────────────────────────
             builder.Entity<Cabinet>(e =>

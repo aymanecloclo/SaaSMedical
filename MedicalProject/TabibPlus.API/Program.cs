@@ -6,6 +6,8 @@ using System.Text;
 using TabibPlus.Application.Interfaces;
 using TabibPlus.Application.Patients.CreatePatient;
 using TabibPlus.Application.Patients.GetPatients;
+using TabibPlus.Application.Patients.GetMonProfil;
+using TabibPlus.Application.Patients.UpdateMonProfil;
 using TabibPlus.Application.Praticiens.GetPraticienById;
 using TabibPlus.Application.Praticiens.SearchPraticiens;
 using TabibPlus.Application.RendezVous.ChangerStatut;
@@ -14,11 +16,13 @@ using TabibPlus.Application.RendezVous.GetDisponibilites;
 using TabibPlus.Application.RendezVous.GetAgendaJour;
 using TabibPlus.Application.RendezVous.GetAgendaSemaine;
 using TabibPlus.Application.RendezVous.GetPraticienStats;
+using TabibPlus.Application.RendezVous.GetMesRendezVous;
 using TabibPlus.Infrastructure.Data;
 using TabibPlus.Infrastructure.Repositories;
 using TabibPlus.Infrastructure.Services;
 using TabibPlus.Application.Auth.RegisterPatient;
 using TabibPlus.Application.Auth.RegisterProfessionnel;
+using TabibPlus.Application.Auth.RegisterSecretaire;
 using TabibPlus.Application.Reference.GetSpecialites;
 using TabibPlus.Application.Reference.GetVilles;
 
@@ -57,6 +61,8 @@ builder.Services
 // ── 4. Handlers (Application) ─────────────────────────
 builder.Services.AddScoped<CreatePatientHandler>();
 builder.Services.AddScoped<GetPatientsHandler>();
+builder.Services.AddScoped<GetMonProfilHandler>();
+builder.Services.AddScoped<UpdateMonProfilHandler>();
 builder.Services.AddScoped<SearchPraticiensHandler>();
 builder.Services.AddScoped<GetPraticienByIdHandler>();
 builder.Services.AddScoped<CreateRendezVousHandler>();
@@ -65,8 +71,10 @@ builder.Services.AddScoped<ChangerStatutHandler>();
 builder.Services.AddScoped<GetAgendaJourHandler>();
 builder.Services.AddScoped<GetAgendaSemaineHandler>();
 builder.Services.AddScoped<GetPraticienStatsHandler>();
+builder.Services.AddScoped<GetMesRendezVousHandler>();
 builder.Services.AddScoped<RegisterPatientHandler>();
 builder.Services.AddScoped<RegisterProfessionnelHandler>();
+builder.Services.AddScoped<RegisterSecretaireHandler>();
 builder.Services.AddScoped<GetSpecialitesHandler>();
 builder.Services.AddScoped<GetVillesHandler>();
 

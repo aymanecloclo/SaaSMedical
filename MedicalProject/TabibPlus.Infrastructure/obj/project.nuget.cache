@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Y4SoDYlzNg8=",
+  "dgSpecHash": "jlWB+QRG0Nk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hj\\Desktop\\SaaS-Medical\\MedicalProject\\TabibPlus.Infrastructure\\TabibPlus.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\hj\\Desktop\\Aymane-project\\SaaS-Medical-Aymane\\MedicalProject\\TabibPlus.Infrastructure\\TabibPlus.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hj\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\hj\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
